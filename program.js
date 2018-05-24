@@ -1,3 +1,4 @@
+var os = require('os');
 process.stdin.setEncoding('utf-8');
 
 process.stdin.on('readable', function() {
@@ -15,10 +16,14 @@ process.stdin.on('readable', function() {
     }
 });
 
-var os = process.env.os.toString();
+var type = os.type();
 
-switch (true) {
-    case (os.indexOf('macOs') > -1 || os.indexOf('Linux') > -1):
+switch (type) {
+    case 'Linux':
+        console.log('The version of Node.js is:', process.versions.node);
+        console.log('The system language is:', process.env.lang);
+        break;
+    case 'Darwin':
         console.log('The version of Node.js is:', process.versions.node);
         console.log('The system language is:', process.env.lang);
         break;
